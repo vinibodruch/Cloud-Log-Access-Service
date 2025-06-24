@@ -1,0 +1,97 @@
+{
+  "realm": "SAP",
+  "enabled": true,
+  "registrationAllowed": false,
+  "rememberMe": false,
+  "clientTemplates": [],
+  "clients": [
+    {
+      "clientId": "cloud-log-access-service",
+      "name": "Cloud Log Access Service",
+      "rootUrl": "http://localhost:8080/cloud-log-access-service",
+      "baseUrl": "http://localhost:8080/cloud-log-access-service",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "secret-key-for-cloud-log-access-service",
+      "redirectUris": [
+        "http://localhost:8080/cloud-log-access-service/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8080"
+      ],
+
+      "defaultClientScopes": [
+        "web-origins",
+        "profile",
+        "roles",
+        "email"
+      ]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+        "name": "aws-bucket-view-only",
+        "description": "Permission to view AWS S3 buckets",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "SAP"
+      },
+      {
+        "id": "b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e",
+        "name": "gcp-bucket-view-only",
+        "description": "Permission to view GCP Cloud Storage buckets",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "SAP"
+      },
+      {
+        "id": "399392d3-ba00-4fd3-a4aa-5838c3a7ea0e",
+        "name": "azure-bucket-view-only",
+        "description": "Permission to view Azure Storage Accounts BLOB",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "SAP"
+      },
+      {
+        "id": "e4f5a6b7-c8d9-0e1f-2a3b-4c5d6e7f8a9b",
+        "name": "aws-bucket-write-only",
+        "description": "Permission to write AWS S3 buckets",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "SAP"
+      },
+      {
+        "id": "0bd324c9-7863-4d10-8a4f-57831ae17e16",
+        "name": "gcp-bucket-write-only",
+        "description": "Permission to write GCP Cloud Storage buckets",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "SAP"
+      },
+      {
+        "id": "c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f",
+        "name": "azure-bucket-write-only",
+        "description": "Permission to view Azure Storage Accounts BLOB",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "SAP"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "id": "1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6",
+      "name": "Access-aws-S3-Buckets",
+      "path": "/Access-aws-S3-Buckets",
+      "subGroups": [],
+      "realmRoles": [
+        "aws-bucket-view-only",
+        "aws-bucket-write-only"
+      ],
+      "clientRoles": {}
+    }
+  ]
+}
