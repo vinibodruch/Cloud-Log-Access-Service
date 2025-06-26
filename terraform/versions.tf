@@ -26,16 +26,16 @@ provider "aws" {
   region = var.aws_region
 }
 
-provider "google" {
-  project = var.gcp_project_id
-  region  = var.gcp_region # Para recursos regionais, como alguns serviços, não para buckets globais
-}
+# provider "google" {
+#   project = var.gcp_project_id
+#   region  = var.gcp_region # Para recursos regionais, como alguns serviços, não para buckets globais
+# }
 
-provider "azurerm" {
-  features {} # Bloco vazio necessário para o provedor Azurerm
-  # As credenciais serão buscadas automaticamente se você estiver logado via Azure CLI
-  # subscription_id = var.azure_subscription_id # Opcional, pode ser inferido
-  # client_id       = var.azure_client_id       # Opcional
-  # client_secret   = var.azure_client_secret   # Opcional
-  # tenant_id       = var.azure_tenant_id       # Opcional
-}
+# provider "azurerm" {
+#   features {} # Bloco vazio necessário para o provedor Azurerm
+#   # As credenciais serão buscadas automaticamente se você estiver logado via Azure CLI
+#   # subscription_id = var.azure_subscription_id # Opcional, pode ser inferido
+#   # client_id       = var.azure_client_id       # Opcional
+#   # client_secret   = var.azure_client_secret   # Opcional
+#   # tenant_id       = var.azure_tenant_id       # Opcional
+# }

@@ -1,0 +1,10 @@
+{"timestamp": "2025-06-26T10:00:01.123Z", "level": "INFO", "service": "user-service", "message": "User 'john.doe' logged in successfully.", "user_id": "usr-123", "session_id": "sess-abc"}
+{"timestamp": "2025-06-26T10:00:02.456Z", "level": "WARN", "service": "order-processor", "message": "Failed to process order 'ORD-456': payment declined.", "order_id": "ORD-456", "customer_id": "cust-789", "error_code": "PAYMENT_FAILED"}
+{"timestamp": "2025-06-26T10:00:03.789Z", "level": "ERROR", "service": "data-ingestor", "message": "Database connection lost. Attempting to reconnect...", "component": "database-connector", "retry_count": 3}
+{"timestamp": "2025-06-26T10:00:04.012Z", "level": "INFO", "service": "notification-service", "message": "Email sent to 'jane.doe@example.com'.", "recipient": "jane.doe@example.com", "email_type": "order_confirmation"}
+{"timestamp": "2025-06-26T10:00:05.345Z", "level": "DEBUG", "service": "user-service", "message": "User profile fetched.", "user_id": "usr-123"}
+{"timestamp": "2025-06-26T10:00:06.678Z", "level": "INFO", "service": "analytics-engine", "message": "Daily report generated.", "report_id": "rep-xyz", "data_size_mb": 12.5}
+{"timestamp": "2025-06-26T10:00:07.901Z", "level": "ERROR", "service": "payment-gateway", "message": "API Key expired for external payment provider.", "provider": "Stripe", "error_details": "API_KEY_EXPIRED"}
+{"timestamp": "2025-06-26T10:00:08.234Z", "level": "INFO", "service": "inventory-manager", "message": "Stock updated for product 'PROD-001'.", "product_id": "PROD-001", "old_stock": 100, "new_stock": 95}
+{"timestamp": "2025-06-26T10:00:09.567Z", "level": "CRITICAL", "service": "auth-service", "message": "Unauthorized access attempt detected from IP '203.0.113.42'.", "ip_address": "203.0.113.42", "attack_type": "bruteforce"}
+{"timestamp": "2025-06-26T10:00:10.890Z", "level": "INFO", "service": "user-service", "message": "User 'alice.smith' created successfully.", "user_id": "usr-456"}

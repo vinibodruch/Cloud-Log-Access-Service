@@ -26,19 +26,26 @@ services:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_HOSTNAME_STRICT: "false"
+      KC_HEALTH_ENABLED: true
     volumes:
       - ./config-files/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
     ports:
       - "8082:8080"
+      - "9000:9000"
+    healthcheck:
+      test: ['CMD-SHELL', '[ -f /tmp/HealthCheck.java ] || echo "public class HealthCheck { public static void main(String[] args) throws java.lang.Throwable { System.exit(java.net.HttpURLConnection.HTTP_OK == ((java.net.HttpURLConnection)new java.net.URL(args[0]).openConnection()).getResponseCode() ? 0 : 1); } }" > /tmp/HealthCheck.java && java /tmp/HealthCheck.java http://localhost:9000/health/live']
+      interval: 5s
+      timeout: 5s
+      retries: 30
 
-  # goapp:
-  #   build:
-  #     context: . 
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     keycloak:
-  #       condition: service_healthy
+  goapp:
+    build:
+      context: . 
+    ports:
+      - "8080:8080"
+    depends_on:
+      keycloak:
+        condition: service_healthy
 
 
 volumes:

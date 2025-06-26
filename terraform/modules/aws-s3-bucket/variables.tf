@@ -1,10 +1,9 @@
-# modules/aws-s3-bucket/variables.tf
 variable "bucket_name" {
-  description = "Nome único para o bucket S3."
+  description = "Unique name for the S3 bucket."
   type        = string
 }
 
 variable "aws_region" {
-  description = "Região da AWS para o bucket (herdado do módulo raiz)."
+  description = "AWS region for the bucket (inherited from root module)."
   type        = string
 }
