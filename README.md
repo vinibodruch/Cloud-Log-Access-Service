@@ -37,6 +37,10 @@ A BFF service to access log files across multiple Cloud Providers
     -d "scope=openid profile email"
     curl: (56) Recv failure: Connection r
 
+### List S3 Bucket
+
+`http://localhost:8080/api/cloud-log-access-services/v1/s3/bucket/{bucket name}/objects`
+
 ### Uninstall
 
 `docker compose down -v`
