@@ -3,29 +3,30 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"Cloud-Log-Access-Service/azure/services"
+
+	"github.com/gin-gonic/gin"
 )
 
-// BlobHandler é a interface para handlers do Azure Blob Storage.
+// BlobHandler is the interface for Azure Blob Storage handlers.
 type BlobHandler interface {
 	ListContainers(c *gin.Context)
 	ListBlobsInContainer(c *gin.Context)
 }
 
-// blobHandlerImpl implementa a interface BlobHandler.
+// blobHandlerImpl implements the BlobHandler interface.
 type blobHandlerImpl struct {
 	blobService services.BlobService
 }
 
-// NewBlobHandler cria uma nova instância de BlobHandler.
+// NewBlobHandler creates a new instance of BlobHandler.
 func NewBlobHandler(blobService services.BlobService) BlobHandler {
 	return &blobHandlerImpl{
 		blobService: blobService,
 	}
 }
 
-// ListContainers lista todos os containers no Azure Blob Storage.
+// ListContainers lists all containers in Azure Blob Storage.
 func (h *blobHandlerImpl) ListContainers(c *gin.Context) {
 	containers, err := h.blobService.ListContainers()
 	if err != nil {
@@ -35,7 +36,7 @@ func (h *blobHandlerImpl) ListContainers(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "List containers (Azure)", "containers": containers})
 }
 
-// ListBlobsInContainer lista todos os blobs em um container específico do Azure Blob Storage.
+// ListBlobsInContainer lists all blobs in a specific Azure Blob Storage container.
 func (h *blobHandlerImpl) ListBlobsInContainer(c *gin.Context) {
 	containerName := c.Param("containerName")
 	if containerName == "" {

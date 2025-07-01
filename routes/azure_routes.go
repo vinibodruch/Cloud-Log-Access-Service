@@ -4,9 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// AzureRoutes configura as rotas relacionadas ao Azure Blob Storage.
+// AzureRoutes configures the routes related to Azure Blob Storage.
 func AzureRoutes(router *gin.RouterGroup, h *AvailableHandlers) {
-	azureBlobHandler := h.AzureBlob // Obtém a interface BlobHandler da coleção
+	azureBlobHandler := h.AzureBlob // Gets the BlobHandler interface from the collection
 
 	azure := router.Group("/azure")
 	{

@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	//"bytes"
 	"net/http"
 
 	"Cloud-Log-Access-Service/aws/services"
@@ -9,18 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// S3Handler é a interface para handlers que interagem com o AWS S3.
+// S3Handler is the interface for handlers that interact with AWS S3.
 type S3Handler interface {
 	ListBucketObjects(c *gin.Context)
 	GetObjectFromBucket(c *gin.Context)
 }
 
-// s3HandlerImpl implementa a interface S3Handler.
+// s3HandlerImpl implements the S3Handler interface.
 type s3HandlerImpl struct {
 	s3Service services.S3Service
 }
 
-// NewS3Handler cria uma nova instância de S3Handler.
+// NewS3Handler creates a new instance of S3Handler.
 func NewS3Handler(s3Service services.S3Service) S3Handler {
 	return &s3HandlerImpl{
 		s3Service: s3Service,
@@ -28,26 +27,26 @@ func NewS3Handler(s3Service services.S3Service) S3Handler {
 }
 
 // ListBucketObjects godoc
-// @Summary Lista objetos em um bucket S3
-// @Description Retorna uma lista de objetos em um bucket S3 especificado
+// @Summary List objects in an S3 bucket
+// @Description Returns a list of objects in a specified S3 bucket
 // @Tags s3
 // @Accept json
 // @Produce json
-// @Param bucketName path string true "Nome do bucket S3"
-// @Success 200 {array} object "Lista de objetos S3"
-// @Failure 400 {object} map[string]string "Erro de requisição inválida"
-// @Failure 500 {object} map[string]string "Erro interno do servidor"
+// @Param bucketName path string true "S3 bucket name"
+// @Success 200 {array} object "List of S3 objects"
+// @Failure 400 {object} map[string]string "Invalid request error"
+// @Failure 500 {object} map[string]string "Internal server error"
 // @Router /s3/bucket/{bucketName}/objects [get]
 func (h *s3HandlerImpl) ListBucketObjects(c *gin.Context) {
 	bucketName := c.Param("bucketName")
 	if bucketName == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Nome do bucket é obrigatório"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bucket name is required"})
 		return
 	}
 
 	objects, err := h.s3Service.ListObjectsInBucket(bucketName)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao listar objetos do bucket", "details": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error listing bucket objects", "details": err.Error()})
 		return
 	}
 
@@ -55,30 +54,30 @@ func (h *s3HandlerImpl) ListBucketObjects(c *gin.Context) {
 }
 
 // GetObjectFromBucket godoc
-// @Summary Obtém um objeto de um bucket S3
-// @Description Retorna o conteúdo de um objeto específico de um bucket S3
+// @Summary Get an object from an S3 bucket
+// @Description Returns the content of a specific object from an S3 bucket
 // @Tags s3
 // @Accept json
 // @Produce octet-stream
-// @Param bucketName path string true "Nome do bucket S3"
-// @Param objectKey path string true "Chave do objeto S3"
-// @Success 200 {string} string "Conteúdo do objeto"
-// @Failure 400 {object} map[string]string "Erro de requisição inválida"
-// @Failure 404 {object} map[string]string "Objeto não encontrado"
-// @Failure 500 {object} map[string]string "Erro interno do servidor"
+// @Param bucketName path string true "S3 bucket name"
+// @Param objectKey path string true "S3 object key"
+// @Success 200 {string} string "Object content"
+// @Failure 400 {object} map[string]string "Invalid request error"
+// @Failure 404 {object} map[string]string "Object not found"
+// @Failure 500 {object} map[string]string "Internal server error"
 // @Router /s3/bucket/{bucketName}/object/{objectKey} [get]
 func (h *s3HandlerImpl) GetObjectFromBucket(c *gin.Context) {
 	bucketName := c.Param("bucketName")
 	objectKey := c.Param("objectKey")
 
 	if bucketName == "" || objectKey == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Nome do bucket e chave do objeto são obrigatórios"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bucket name and object key are required"})
 		return
 	}
 
 	content, err := h.s3Service.GetObjectFromBucket(bucketName, objectKey)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao obter objeto do bucket", "details": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error getting object from bucket", "details": err.Error()})
 		return
 	}
 

@@ -1,47 +1,47 @@
 package config
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
-	"github.com/joho/godotenv"
 )
 
-// AppConfig contém todas as configurações globais da aplicação.
+// AppConfig contains all global application configurations.
 type AppConfig struct {
-	AWS    AWSConfig
-	Azure  AzureConfig
-	GCP    GCPConfig // Placeholder para futura integração GCP
+	AWS        AWSConfig
+	Azure      AzureConfig
+	GCP        GCPConfig // Placeholder for future GCP integration
 	APIVersion string
 	Port       string
 }
 
-// LoadAppConfig carrega todas as configurações da aplicação a partir de variáveis de ambiente ou .env.
+// LoadAppConfig loads all application configurations from environment variables or .env file.
 func LoadAppConfig() AppConfig {
 	err := godotenv.Load()
 	if err != nil {
-		log.Printf("Aviso: Não foi possível carregar o arquivo .env. As variáveis de ambiente do sistema serão usadas.")
+		log.Printf("Warning: Could not load .env file. System environment variables will be used.")
 	}
 
 	awsCfg := LoadAWSConfig()
 	azureCfg := LoadAzureConfig()
-	gcpCfg := GCPConfig{} // Placeholder: Implemente LoadGCPConfig se necessário
+	gcpCfg := GCPConfig{} // Placeholder: Implement LoadGCPConfig if needed
 
 	apiVersion := os.Getenv("API_VERSION")
 	if apiVersion == "" {
 		apiVersion = "v1"
-		log.Printf("Aviso: Variável de ambiente API_VERSION não definida. Usando a versão padrão: %s", apiVersion)
+		log.Printf("Warning: API_VERSION environment variable not set. Using default version: %s", apiVersion)
 	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
-		log.Printf("Aviso: Variável de ambiente PORT não definida. Usando a porta padrão: %s", port)
+		log.Printf("Warning: PORT environment variable not set. Using default port: %s", port)
 	}
 
 	return AppConfig{
-		AWS:    awsCfg,
-		Azure:  azureCfg,
-		GCP:    gcpCfg,
+		AWS:        awsCfg,
+		Azure:      azureCfg,
+		GCP:        gcpCfg,
 		APIVersion: apiVersion,
 		Port:       port,
 	}

@@ -9,25 +9,25 @@ import (
 	//"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
 )
 
-// BlobService é a interface para interagir com o Azure Blob Storage.
+// BlobService is the interface for interacting with Azure Blob Storage.
 type BlobService interface {
 	ListContainers() ([]string, error)
 	ListBlobsInContainer(containerName string) ([]string, error)
 }
 
-// blobServiceImpl implementa a interface BlobService.
+// blobServiceImpl implements the BlobService interface.
 type blobServiceImpl struct {
 	client *azblob.Client
 }
 
-// NewBlobService cria e retorna uma nova instância de BlobService.
+// NewBlobService creates and returns a new instance of BlobService.
 func NewBlobService(client *azblob.Client) BlobService {
 	return &blobServiceImpl{
 		client: client,
 	}
 }
 
-// ListContainers lista todos os containers de blob na conta de armazenamento.
+// ListContainers lists all blob containers in the storage account.
 func (s *blobServiceImpl) ListContainers() ([]string, error) {
 	var containers []string
 	pager := s.client.NewListContainersPager(&azblob.ListContainersOptions{})
@@ -44,7 +44,7 @@ func (s *blobServiceImpl) ListContainers() ([]string, error) {
 	return containers, nil
 }
 
-// ListBlobsInContainer lista todos os blobs em um container específico.
+// ListBlobsInContainer lists all blobs in a specific container.
 func (s *blobServiceImpl) ListBlobsInContainer(containerName string) ([]string, error) {
 	var blobs []string
 	containerClient := s.client.ServiceClient().NewContainerClient(containerName)

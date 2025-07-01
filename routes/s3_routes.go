@@ -4,9 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// S3Routes configura as rotas relacionadas ao AWS S3.
+// S3Routes configures the routes related to AWS S3.
 func S3Routes(router *gin.RouterGroup, h *AvailableHandlers) {
-	s3Handler := h.S3 // Obtém a interface S3Handler da coleção
+	s3Handler := h.S3 // Gets the S3Handler interface from the collection
 
 	s3 := router.Group("/s3")
 	{

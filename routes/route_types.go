@@ -4,6 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// RouteSetupFunc define a assinatura para funções que configuram grupos de rotas.
-// Ela recebe o grupo de roteador do Gin e uma struct com todos os handlers disponíveis.
+// RouteSetupFunc defines the signature for functions that set up route groups.
+// It receives the Gin router group and a struct with all available handlers.
 type RouteSetupFunc func(routerGroup *gin.RouterGroup, h *AvailableHandlers)
